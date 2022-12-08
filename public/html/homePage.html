@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../scss/homePage.css">
+    <!-- <link rel="stylesheet" href="../scss/re.css"> -->
+    <link rel="stylesheet" href="../scss/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Page</title>
+</head>
+<body>
+    <div class="title-bar">
+        <div class="close" onclick="closeWindown()"></div>
+        <div class="minimize" onclick="minimizeWindown()"></div>
+        <div class="pin" onclick="pinWindown()"></div>
+    </div>
+    <div class="header">
+        <div class="logoheader button"><img src="../static/monolisix.png"></div>
+        <div>
+            <p class="monolisix">MONOLISIX</p>
+        </div>
+        <div>
+            <i class="arrow down"></i>
+        </div>
+            <div class="setting button" style="color: rgb(193,195,205); width: 20px; height: 20px; position: relative; right: 9px; margin-left: auto;" id="setting button" onclick="settingForm()">
+                <i class="fa-solid fa-gear" ></i>
+            </div>
+        </div>
+        <div class="floor-list" id="floor-list"> 
+            <div id="add-floor"></div>
+        </div>
+        <div id="room-list" class="room-list">
+            <div class="room" id="room">
+            </div>
+        </div>
+        <div id="statusMicHeadphone" class="statusMicHeadphone">
+            <div class="buttons">
+                <button id="status" onclick="showSelectStatus()">ステータス</button>
+                <div id="show-status" class="show-status">
+                    <input id="custom-status" type="text" placeholder="Enter your custom status...."/>
+                    <p onclick="changeStatusUser(0)">オフライン</p>
+                    <p onclick="changeStatusUser(1)">オンライン中</p>
+                    <p onclick="changeStatusUser(2)">多忙中</p>
+                    <p onclick="changeStatusUser(3)">離席中</p>
+                    <p onclick="changeStatusUser(4)">電話中</p>
+                    <p onclick="changeStatusUser(5)">休憩中</p>
+                </div>
+            </div>
+            <div class="flex-micheadscreen">
+            <div class="mic button" onclick="changeStatusMic(0)">
+                <span class="material-icons" style="display: none;">
+                    mic
+                    </span>
+                <span class="material-icons">
+                    mic_off
+                </span>
+            </div>
+            <div class="headphone button" onclick="changeStatusSpeaker(0)">
+                <span class="material-icons" style="display: none;">
+                    headset
+                    </span>
+                <span class="material-icons">
+                    headset_off
+                </span>
+            </div>
+            <div class="screen button">
+                <span class="material-icons">
+                    tv
+                    </span>
+            </div>
+        </div>
+    </div>
+        <div class="footer">
+            <div class="logo"><img id="currentAvatar">
+                <span class="Button-inner">
+                    デザイナー
+                </span>
+                <span class="Badge">
+                  <h3 id="username"></h3> 
+                </span>
+            </div>
+            <div class="exitbutton" onclick="window.api.invoke('leaveRoom')">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+        </div>
+    </body>
+<script src="../../out/homePage.js"></script>
+<script src="../../out/settings.js"></script>
+</html>
