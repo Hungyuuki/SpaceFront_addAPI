@@ -135,7 +135,7 @@ function createUsersHTMLInRoom(user: any) {
                             <div class="user" id="user-${user.user_id}">
                               <div class="logo-userbutton"><img src=${user.user_avatar}></div>
                               <div class="status-users" style="background-color: ${colorBackroundStatus}">
-                                <img src="${listStatusUserIcon[user.user_avatar]}">
+                                <img src="${listStatusUserIcon}">
                               </div>
                               <h4 class="username">${user.user_name}</h4>
                             </div>
@@ -236,7 +236,11 @@ const showPageFloor = (floor_id: any) => {
     .then((data) => {
       const [floors, rooms, users, user] = data;
       if (floors.floors[0] == "") {
-        let elButtonAdd = `<div class="floor add-new" style="top: 10px; background-color: black; z-index: -1;" onclick="addFloor()"><p>+</p></div>`;
+        let elButtonAdd = `<svg class="floors add-new" viewBox="0 0 100 100" style="width: 40px; height: 40px; background-color: rgb(255,255,255);" onclick="addFloor()">
+        <circle cx="50" cy="37" r="29" fill="none" stroke-width="6"></circle>
+        <line class="plus" x1="35.5" y1="38" x2="65.5" y2="38" stroke-width="6"></line>
+        <line class="plus" x1="50" y1="23.5" x2="50" y2="53.5" stroke-width="6"></line>
+      </svg>`;
         addElement(elButtonAdd, "floors");
       } else {
         const floorsHTML = createFLoorsHTML(floors.floors[0], floor_id);
@@ -270,11 +274,7 @@ function createFLoorsHTML(floors: any, floor_id: any) {
   for(let i = 0; i < floors.length; i++) {
     floorsHTML += createFLoorElement(floors[i], i * 60, floors[i].id ==  floor_id ? '#7f7f7f' : '#dbdbdb');
   }
-  floorsHTML += `<svg class="floors add-new" viewBox="0 0 100 100" style="width: 40px; height: 40px; background-color: rgb(255,255,255);" onclick="addFloor()">
-  <circle cx="50" cy="37" r="29" fill="none" stroke-width="6"></circle>
-  <line class="plus" x1="35.5" y1="38" x2="65.5" y2="38" stroke-width="6"></line>
-  <line class="plus" x1="50" y1="23.5" x2="50" y2="53.5" stroke-width="6"></line>
-</svg>`;
+  floorsHTML += `<div class="floor add-new" style=" background-color: black; z-index: -1;" onclick="addFloor()"><p>+</p></div>`;
   return floorsHTML;
 }
 
