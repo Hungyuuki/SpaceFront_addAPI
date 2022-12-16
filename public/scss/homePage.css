@@ -200,28 +200,28 @@ body {
   border-radius: 1px;
 }
 
-.room {
+.relative {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   flex-direction: column;
   width: 300px;   
   padding-bottom: 5px;
   z-index: 10;
-  position: absolute;
+  /* position: absolute;
   top: 130px;
-  display: block;
+  display: block; */
 }
 
-.room .user {
+.relative .user {
   cursor: pointer;
   justify-content: space-between;
 }
 
-.room .lock-keyhole{
+/* .room .lock-keyhole{
   display: inline-block;
-  /* color: rgb(109,113,131); */
+  color: rgb(109,113,131);
   color: black;
-}
+} */
 
 .header-room {
   display: flex;
@@ -230,6 +230,8 @@ body {
   padding-left: 10px;
   color: rgb(109,113,131);
   margin-bottom: 5px;
+  position: relative;
+  margin-top: 8px;
 }
 
 .header-room i {
@@ -249,8 +251,6 @@ body {
   margin-top: 5px;
 }
 
-
-
 .header-room img {
   height: 50px;
   width: 50px;
@@ -258,7 +258,27 @@ body {
   border-radius: 5px;
 }
 
+.remove-room {
+  border-radius: 50%;
+  border: 1px solid transparent;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: center;
+  font-size: 16px;
+  background-color: #d9d9d9;
+  z-index: 999;
+  color: rgb(61, 62, 68);
+}
+.remove-room button{
+  color: #F1F1F1;
+}
 
+.remove-room:hover {
+  color: snow;
+  background-color: crimson;
+  float: right;
+}
 
 .svg-circle{
   background: rgb(252,76,86);
@@ -266,6 +286,11 @@ body {
   width: 10px;
   border-radius: 50%;
   margin-right: 2px;
+}
+.remove-room:hover {
+  color: snow;
+  background-color: crimson;
+  float: right;
 }
 
 
@@ -296,14 +321,6 @@ ul {
   align-items: center;
 }
 
-
-.user {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  top: 60px;
-}
 .status-users {
   border: 1px solid #d9d9d9;
   width: 30px;
@@ -367,6 +384,14 @@ ul {
     scale: 0.9;
     background: rgb(252,76,86);
   }
+
+  .user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    /* top: 60px; */
+  }  
 
 .user * {
   width: 30px;

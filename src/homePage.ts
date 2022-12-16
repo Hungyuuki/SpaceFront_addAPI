@@ -28,12 +28,11 @@ window.api
   .store("Get", "floorId")
   .then(function (floor_id: number | string) {
     showPageFloor(floor_id);
-  })
-
-  window.api.store('Get', 'userName')
+    window.api.store('Get', 'userName')
     .then((userName: any)=> {
       document.getElementById("username").innerHTML = userName;
-   })
+    })
+  })
 
 
 function showFloor(id: any) {
@@ -95,9 +94,9 @@ const renderHTMLInFloor = (floor_id : any, rooms: any, users: any, oldFloorId : 
     floorHTML += createRoomElement(result[i].room, result[i].users)
   }
   if (oldFloorId != null) {
-    changeBackgroundColorForElement(`${oldFloorId}`, '#dbdbdb')
+    changeBackgroundColorForElement(`${oldFloorId}`, 'rgb(252,76,86)')
   }
-  changeBackgroundColorForElement(`${floor_id}`, '#7f7f7f')
+  changeBackgroundColorForElement(`${floor_id}`, 'rgb(238,238,238)')
   document.getElementById("room-list").innerHTML = floorHTML;
 }
 
@@ -190,6 +189,7 @@ function createRoomElement(room: any, users: any) {
   const uids = users?.map((user : any) => user.uid);
   return `
   <div class="relative" id="room-${room.room_id}">
+  <button onclick ="showConfirmModel(${room.room_id}, '[${uids}]' , ${users?.length})" class="remove-room"> x </button>
     <div class="header-room button"  onclick="joinRoom(${room.room_id})">
     <div class="circle">
                   <svg class="svg-circle">
@@ -236,11 +236,7 @@ const showPageFloor = (floor_id: any) => {
     .then((data) => {
       const [floors, rooms, users, user] = data;
       if (floors.floors[0] == "") {
-        let elButtonAdd = `<svg class="floors add-new" viewBox="0 0 100 100" style="width: 40px; height: 40px; background-color: rgb(255,255,255);" onclick="addFloor()">
-        <circle cx="50" cy="37" r="29" fill="none" stroke-width="6"></circle>
-        <line class="plus" x1="35.5" y1="38" x2="65.5" y2="38" stroke-width="6"></line>
-        <line class="plus" x1="50" y1="23.5" x2="50" y2="53.5" stroke-width="6"></line>
-      </svg>`;
+        let elButtonAdd = `<div class="floor add-new" style="top: 10px; background-color: black; z-index: -1;" onclick="addFloor()"><p>+</p></div>`;
         addElement(elButtonAdd, "floors");
       } else {
         const floorsHTML = createFLoorsHTML(floors.floors[0], floor_id);
@@ -272,7 +268,9 @@ function createFLoorsHTML(floors: any, floor_id: any) {
   localStorage.setItem('first_floor', floors[0].id);
   let floorsHTML = ``;
   for(let i = 0; i < floors.length; i++) {
-    floorsHTML += createFLoorElement(floors[i], i * 60, floors[i].id ==  floor_id ? '#7f7f7f' : '#dbdbdb');
+    floorsHTML += createFLoorElement(floors[i], i * 60, floors[i].id ==  floor_id ? 
+      '#7f7f7f' : 
+      '#dbdbdb');
   }
   floorsHTML += `<div class="floor add-new" style=" background-color: black; z-index: -1;" onclick="addFloor()"><p>+</p></div>`;
   return floorsHTML;
@@ -316,7 +314,7 @@ function appendUser(user: any) {
     dispayStatus = '-none'
   }
   let text =`
-  <li class="object">
+  <li class="object" style="display: flex">
   <div class="user" id="user-${user.user_id}">
     <div class="logo-userbutton"><img src=${user.user_avatar}></div>
     <div class="status-users" style="background-color: ${colorBackroundStatus}">
@@ -324,7 +322,7 @@ function appendUser(user: any) {
     </div>
     <h4 class="username">${user.user_name}</h4>
   </div>
-  <div class="flex-container">
+  <div class="flex-container" >
     <div class="mic button" onclick="changeStatusMic(${user.user_id})">
       <span class="material-icons" id="mic-on-${user.user_id}" style="display: ${displayMicOn};">
           mic
@@ -459,8 +457,8 @@ function appendNewFloor(user: any) {
   const addFloor = document.querySelector('.floor.add-new') as HTMLElement;
   if(numberChilds != null && addFloor != null) {
      const position = ((numberChilds == 1 ? 0 : numberChilds - 1) * 60);
-     newFloorElement.style.top = `${position}px`;
-     addFloor.style.top = `${position + 60}px`;
+     newFloorElement.style.right = `${position}px`;
+     addFloor.style.right = `${position + 60}px`;
   }
   if(localStorage.getItem('userId') == user.userId && numberChilds > 2) {
     document.getElementById(`${user.old_floor_id}`).style.backgroundColor = '#dbdbdb';
