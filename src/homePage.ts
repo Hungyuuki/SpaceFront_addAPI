@@ -94,9 +94,9 @@ const renderHTMLInFloor = (floor_id : any, rooms: any, users: any, oldFloorId : 
     floorHTML += createRoomElement(result[i].room, result[i].users)
   }
   if (oldFloorId != null) {
-    changeBackgroundColorForElement(`${oldFloorId}`, 'rgb(252,76,86)')
+    changeBackgroundColorForElement(`${oldFloorId}`, 'rgb(238,238,238)')
   }
-  changeBackgroundColorForElement(`${floor_id}`, 'rgb(238,238,238)')
+  changeBackgroundColorForElement(`${floor_id}`, 'rgb(252,76,86)' )
   document.getElementById("room-list").innerHTML = floorHTML;
 }
 
@@ -129,34 +129,35 @@ function createUsersHTMLInRoom(user: any) {
     dispayStatus = '-none'
     user_login_status = ''
   }
-  return                  `
-                          <li class="object">
-                            <div class="user" id="user-${user.user_id}">
-                              <div class="logo-userbutton"><img src=${user.user_avatar}></div>
-                              <div class="status-users" style="background-color: ${colorBackroundStatus}">
-                                <img src="${listStatusUserIcon}">
-                              </div>
-                              <h4 class="username">${user.user_name}</h4>
-                            </div>
-                            <div class="flex-container">
-                              <div class="mic button" onclick="changeStatusMic(${user.user_id})">
-                                <span class="material-icons" id="mic-on-${user.user_id}" style="display: ${displayMicOn};">
-                                    mic
-                                </span>
-                                <span class="material-icons" id="mic-off-${user.user_id}" style="display: ${displayMicOff};">
-                                    mic_off
-                                </span>
-                              </div>
-                              <div class="headphone button" onclick="changeStatusSpeaker(${user.user_id});">
-                                <span class="material-icons" id="speaker-on-${user.user_id}" style="display: ${displaySpeakerOn};">
-                                    headset
-                                </span>
-                                <span class="material-icons" id="speaker-off-${user.user_id}" style="display: ${displaySpeakerOff};>
-                                    headset_off
-                                </span>
-                              </div>
-                            </div>
-                          </li>
+  return  `
+  <li class="object">
+    <div class="user" id="user-${user.user_id}">
+    <div class="logo-userbutton"><img src=${user.user_avatar}></div>
+    <div class="status-users" style="background-color: ${colorBackroundStatus}">
+      <img src="${listStatusUserIcon}">
+    </div>
+    <h4 class="username">${user.user_name}</h4>
+    </div>
+    <div class="flex-container">
+      <div class="mic button" onclick="changeStatusMic(${user.user_id})">
+        <span class="material-icons" id="mic-on-${user.user_id}" style="display: ${displayMicOn};">
+            mic
+        </span>
+        <span class="material-icons" id="mic-off-${user.user_id}" style="display: ${displayMicOff};">
+            mic_off
+        </span>
+      </div>
+      <div class="headphone button" onclick="changeStatusSpeaker(${user.user_id});">
+        <span class="material-icons" id="speaker-on-${user.user_id}" style="display: ${displaySpeakerOn};">
+            headset
+        </span>
+        <span class="material-icons" id="speaker-off-${user.user_id}" style="display: ${displaySpeakerOff};>
+            headset_off
+        </span>
+      </div>
+    </div>      
+  </li>                  
+                            
                           `;
 }
 
@@ -236,7 +237,11 @@ const showPageFloor = (floor_id: any) => {
     .then((data) => {
       const [floors, rooms, users, user] = data;
       if (floors.floors[0] == "") {
-        let elButtonAdd = `<div class="floor add-new" style="top: 10px; background-color: black; z-index: -1;" onclick="addFloor()"><p>+</p></div>`;
+        let elButtonAdd = `<svg class="floors add-new" viewBox="0 0 100 100" style="width: 40px; height: 40px; background-color: rgb(255,255,255);" onclick="addFloor()">
+        <circle cx="50" cy="37" r="29" fill="none" stroke-width="6"></circle>
+        <line class="plus" x1="35.5" y1="38" x2="65.5" y2="38" stroke-width="6"></line>
+        <line class="plus" x1="50" y1="23.5" x2="50" y2="53.5" stroke-width="6"></line>
+      </svg>`;
         addElement(elButtonAdd, "floors");
       } else {
         const floorsHTML = createFLoorsHTML(floors.floors[0], floor_id);
@@ -268,17 +273,33 @@ function createFLoorsHTML(floors: any, floor_id: any) {
   localStorage.setItem('first_floor', floors[0].id);
   let floorsHTML = ``;
   for(let i = 0; i < floors.length; i++) {
-    floorsHTML += createFLoorElement(floors[i], i * 60, floors[i].id ==  floor_id ? 
-      '#7f7f7f' : 
-      '#dbdbdb');
+    floorsHTML += createFLoorElement(floors[i], floors[i].id ==  floor_id ? 
+      'rgb(252,76,86)': 'rgb(238, 238, 238)');
   }
-  floorsHTML += `<div class="floor add-new" style=" background-color: black; z-index: -1;" onclick="addFloor()"><p>+</p></div>`;
+  floorsHTML += `<svg class="floors add-new" viewBox="0 0 100 100" style="width: 40px; height: 40px; background-color: rgb(255,255,255);" onclick="addFloor()">
+  <circle cx="50" cy="37" r="29" fill="none" stroke-width="6"></circle>
+  <line class="plus" x1="35.5" y1="38" x2="65.5" y2="38" stroke-width="6"></line>
+  <line class="plus" x1="50" y1="23.5" x2="50" y2="53.5" stroke-width="6"></line>
+</svg>`;
   return floorsHTML;
 }
 
-function createFLoorElement(floor: any, position : any, backgroundColor : any) {
+function createFLoorElement(floor: any, backgroundColor : any) {
   return `
-  <div class="floor" style="top: ${position}px; background-color: ${backgroundColor}; z-index: 1000;" id=${floor.id} onclick="showFloor(${floor.id})" >
+  <div class="floor" style="display: inline-flex; max-width: 100px; min-width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: auto;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  vertical-align: middle; 
+  horizontal-align: middle;
+  background-color: ${backgroundColor}; 
+  color: rgb(238, 238, 238)'; 
+  z-index: 1000;" 
+  id=${floor.id} onclick="showFloor(${floor.id})" >
     <button onclick ="showConfirmModelFloor(${floor.id})" class="remove-floor" > x </button>
     <p>${floor.name}</p>
   </div>`;
@@ -314,33 +335,36 @@ function appendUser(user: any) {
     dispayStatus = '-none'
   }
   let text =`
-  <li class="object" style="display: flex">
-  <div class="user" id="user-${user.user_id}">
-    <div class="logo-userbutton"><img src=${user.user_avatar}></div>
-    <div class="status-users" style="background-color: ${colorBackroundStatus}">
-    <img src="${listStatusUserIcon[user.user_avatar]}">
-    </div>
-    <h4 class="username">${user.user_name}</h4>
-  </div>
-  <div class="flex-container" >
-    <div class="mic button" onclick="changeStatusMic(${user.user_id})">
-      <span class="material-icons" id="mic-on-${user.user_id}" style="display: ${displayMicOn};">
-          mic
-      </span>
-      <span class="material-icons" id="mic-off-${user.user_id}" style="display: ${displayMicOff};">
-          mic_off
-      </span>
-    </div>
-    <div class="headphone button" onclick="changeStatusSpeaker(${user.user_id});">
-      <span class="material-icons" id="speaker-on-${user.user_id}" style="display: ${displaySpeakerOn};">
-          headset
-      </span>
-      <span class="material-icons" id="speaker-off-${user.user_id}" style="display: ${displaySpeakerOff};>
-          headset_off
-      </span>
-    </div>
-  </div>
-</li>
+  <li class="object">
+    <div class="user" id="user-${user.user_id}">
+      <div class="logo-userbutton"><img src=${user.user_avatar}></div>
+      <div class="status-users" style="background-color: ${colorBackroundStatus}">
+      <img src="${listStatusUserIcon[user.user_avatar]}">
+      </div>
+      <h4 class="username">${user.user_name}</h4>
+      </div>
+      <div class="flex-container">
+        <div class="mic button" onclick="changeStatusMic(${user.user_id})">
+          <span class="material-icons" id="mic-on-${user.user_id}" style="display: ${displayMicOn};">
+              mic
+          </span>
+          <span class="material-icons" id="mic-off-${user.user_id}" style="display: ${displayMicOff};">
+              mic_off
+          </span>
+        </div>
+        <div class="headphone button" onclick="changeStatusSpeaker(${user.user_id});">
+          <span class="material-icons" id="speaker-on-${user.user_id}" style="display: ${displaySpeakerOn};">
+              headset
+          </span>
+          <span class="material-icons" id="speaker-off-${user.user_id}" style="display: ${displaySpeakerOff};>
+              headset_off
+          </span>
+        </div>
+      </div>
+    </li>
+   
+    
+
               `;
   const userElement = document.createElement('div');
   userElement.innerHTML = text;
@@ -444,9 +468,9 @@ function appendNewFloor(user: any) {
   newFloorElement.setAttribute('class', 'floor');
   newFloorElement.setAttribute('onclick', `showFloor(${user.floor_id})`)
   if(user.user_id == localStorage.getItem('userId')) {
-    newFloorElement.style.backgroundColor = '#7f7f7f';
+    newFloorElement.style.backgroundColor = 'rgb(193,195,205)';
   } else {
-    newFloorElement.style.backgroundColor = '#dbdbdb';
+    newFloorElement.style.backgroundColor = 'rgb(252,76,86)';
   }
   newFloorElement.style.zIndex = '1000';
   newFloorElement.innerHTML = `
@@ -461,7 +485,7 @@ function appendNewFloor(user: any) {
      addFloor.style.right = `${position + 60}px`;
   }
   if(localStorage.getItem('userId') == user.userId && numberChilds > 2) {
-    document.getElementById(`${user.old_floor_id}`).style.backgroundColor = '#dbdbdb';
+    document.getElementById(`${user.old_floor_id}`).style.backgroundColor = 'rgb(193,195,205)';
     localStorage.setItem("floorId", user.floor_id);
     window.api.store('Set', {floorId: user.floor_id})
   }
@@ -611,7 +635,7 @@ function getMemberList() {
       } else {
         deleteElement("room");
         let text = `
-        <div class="room" id="room">
+        <div class="relative" id="room">
         </div>
       `;
         addElement(text, "room-list");
@@ -636,7 +660,7 @@ function getMemberList() {
             displaySpeakerOff = "none"
           }
           let text = `
-          <div class="user" style="width: 280px;">
+          <div class="user" style="width: 300px;">
           <div class="logo"><img src="${res.users_company[0][i].avatar}"></div>
           <div ><img src="../static/crown.png" style="margin-left: -9px; display: ${check}"  width="10px" height="10px"></div>
           <h4>${res.users_company[0][i].onamae}</h4>

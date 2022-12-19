@@ -7,7 +7,7 @@ body {
   bottom: 0;
   z-index: 0;
   height: 100%;
-  width: 310px;
+  width: 300px;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI",
     Roboto, "Hiragino San", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP",
     "Yu Gothic", sans-serif;
@@ -85,19 +85,7 @@ body {
   padding-left: 10px;
 }
 
-.remove-floor {
-  border-radius: 100%;
-  border: 1px solid transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 10px;
-  background-color: #dbdbdb;
-}
-.remove-floor:hover {
-  background: crimson;
-  color: snow;
-}
+
 
 .buttons button{
   border-color: #d1cfcf;
@@ -135,9 +123,10 @@ body {
   display: none;
 }
 .floor-list{
-  text-align: center;
+  padding-left: 10px;
   justify-content: space-between;
   width: 300px;
+  display: flex;
 }
 .floor{
   max-width: 100px;
@@ -155,15 +144,18 @@ body {
 .floor p{
   text-align: center;
 }
-/* .floors .add {
-  margin-left: 275px;
-  font-weight: lighter;
-  height: 30px;
-  width: 15px;
-  padding-left: 3px;
-  border: 1px solid black;
-  border-radius: 0 0 5px 0;
-} */
+
+.remove-floor {
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  font-size: 10px;
+  background-color: #dbdbdb;
+}
+.remove-floor:hover {
+  background: crimson;
+  color: snow;
+} 
 
 .floors .add-new{
   height: 30px;
@@ -307,13 +299,13 @@ ul {
 .object{
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   margin: auto;
   vertical-align: auto;
 }
 .object .flex-container{
   margin-left: auto;
-  margin-right: 10px;
+  margin-right: 60px;
   color: rgb(193,195,205);
   flex-wrap: nowrap;
   display: flex;
@@ -390,6 +382,8 @@ ul {
     align-items: center;
     margin-bottom: 5px;
     margin-top: 5px;
+    padding-left: 30px;
+    color: rgb(193,195,205);
     /* top: 60px; */
   }  
 
@@ -399,7 +393,7 @@ ul {
 }
 
 .user h4 {
-  width: 160px;
+  width: 150px;
   text-align: left;
   color: rgb(109,113,131);
 }
@@ -409,6 +403,7 @@ ul {
   height: 34px;
   border-radius: 10px;
   vertical-align: middle;
+  position: relative;
 }
 
 .user .logo-userbutton img{
@@ -417,13 +412,15 @@ ul {
   border-radius: 10px;
   text-align: center;
   vertical-align: baseline;
+  position: absolute;
+  right: 5px;
 }
 
-.user .calendar{
+/* .user .calendar{
   position: absolute;
   right: 110px;
   color: rgb(109,113,131);
-}
+} */
 
 
 
@@ -431,21 +428,25 @@ ul {
   margin-left: auto;
   color: rgb(193,195,205);
   scale: 0.9;
-  margin: auto;
+  /* margin: auto; */
+  position: absolute;
+  right: 30px;
 }
 
 .user .headphone .button{
   margin-left: auto;
   color: rgb(193,195,205);
   scale: 0.9;
-  margin: auto;
+  /* margin: auto; */
+  position: absolute;
+  right: 15px;
 }
-.user .screen .button{
+/* .user .screen .button{
   margin-left: auto;
   right: 30px;
   color: rgb(193,195,205); 
   margin: auto;
-}
+} */
 
 
 .footer {
