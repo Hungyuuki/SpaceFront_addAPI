@@ -192,22 +192,22 @@ body {
   border-radius: 1px;
 }
 
-.relative {
+.room {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   width: 300px;   
   padding-bottom: 5px;
   z-index: 10;
-  /* position: absolute;
-  top: 130px;
-  display: block; */
-}
-
-.relative .user {
   cursor: pointer;
   justify-content: space-between;
+  vertical-align: middle;
 }
+
+/* .room .user{
+  cursor: pointer;
+  justify-content: space-between;
+} */
 
 /* .room .lock-keyhole{
   display: inline-block;
@@ -254,7 +254,7 @@ body {
   border-radius: 50%;
   border: 1px solid transparent;
   position: absolute;
-  top: 10px;
+  top: 4px;
   right: 10px;
   text-align: center;
   font-size: 16px;
@@ -296,10 +296,9 @@ ul {
   padding: 0;
   font-family: 'Arial', Helvetica, sans-serif;
 }
-.object{
+/* .object{
   display: flex;
   align-items: center;
-  /* padding-left: 20px; */
   margin: auto;
   vertical-align: auto;
 }
@@ -311,7 +310,7 @@ ul {
   display: flex;
   padding-right: 0px;
   align-items: center;
-}
+} */
 
 .status-users {
   border: 1px solid #d9d9d9;
@@ -384,6 +383,7 @@ ul {
     margin-top: 5px;
     padding-left: 30px;
     color: rgb(193,195,205);
+    position: relative;
     /* top: 60px; */
   }  
 
@@ -393,12 +393,12 @@ ul {
 }
 
 .user h4 {
-  width: 150px;
+  width: 140px;
   text-align: left;
   color: rgb(109,113,131);
 }
 
-.user .logo-userbutton{
+.user .logo-user{
   width: 34px;
   height: 34px;
   border-radius: 10px;
@@ -406,7 +406,7 @@ ul {
   position: relative;
 }
 
-.user .logo-userbutton img{
+.user .logo-user img{
   width: 34px;
   height: 34px;
   border-radius: 10px;
@@ -424,23 +424,23 @@ ul {
 
 
 
-.user .mic .button{
+/* .mic .button{
   margin-left: auto;
   color: rgb(193,195,205);
   scale: 0.9;
-  /* margin: auto; */
+  margin: auto;
   position: absolute;
   right: 30px;
 }
 
-.user .headphone .button{
+.headphone .button{
   margin-left: auto;
   color: rgb(193,195,205);
   scale: 0.9;
-  /* margin: auto; */
+  margin: auto;
   position: absolute;
   right: 15px;
-}
+} */
 /* .user .screen .button{
   margin-left: auto;
   right: 30px;
@@ -716,7 +716,7 @@ button {
   border: 0;
 } */
 
-.Button-inner {
+.job {
   align-items: center;
   border: 2px solid transparent;
   color: rgb(109,113,131);
@@ -732,11 +732,11 @@ button {
   font-weight: 900;
 }
 
-.Button:hover .Button-inner {
+.Button:hover .job {
   filter: brightness(1.1);
 }
 
-.Button:active .Button-inner {
+.Button:active .job {
   filter: brightness(0.9);
 }
 .Button span{
